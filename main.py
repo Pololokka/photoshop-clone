@@ -91,3 +91,48 @@ class ImageEditorApp:
             ("Sharpen", ImageFilter.SHARPEN),
             ("Smooth", ImageFilter.SMOOTH),
         ]
+
+        for filter_name, filter_type in filters:
+            tk.Button(
+                self.filters_frame,
+                text=filter_name,
+                command=lambda ft=filter_type: self.apply_filter(ft),
+                bg="#007bff",
+                fg="#ffffff",
+                font=("Arial", 12),
+                padx=10,
+                pady=5,
+            ).pack(side="left", padx=10, pady=5)
+
+        self.buttons_frame = tk.Frame(self.root, bg="#e6f7ff")
+        self.buttons_frame.pack(pady=10)
+
+        self.reset_button = tk.Button(
+            self.buttons_frame,
+            text="Reset Image",
+            command=self.reset_image,
+            bg="#007bff",
+            fg="#ffffff",
+            font=("Arial", 12),
+            padx=10,
+            pady=5,
+        )
+        self.reset_button.pack(side="left", pady=10)
+
+        self.save_button = tk.Button(
+            self.buttons_frame,
+            text="Save Image",
+            command=self.save_image,
+            bg="#007bff",
+            fg="#ffffff",
+            font=("Arial", 12),
+            padx=10,
+            pady=5,
+        )
+        self.save_button.pack(side="left", pady=10)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ImageEditorApp(root)
+    root.mainloop()
