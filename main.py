@@ -14,6 +14,8 @@ class ImageEditorApp:
         self.image = None
         self.image_tk = None
 
+        self.create_widgets()
+
     def load_image(self):
         file_path = filedialog.askopenfilename(
             filetypes=[("Image Files", "*.jpg *.jpeg *.png *.bmp *.gif")]
@@ -33,3 +35,59 @@ class ImageEditorApp:
                 self.image.resize((new_width, new_height), Image.LANCZOS)
             )
             self.image_label.config(image=self.image_tk)
+
+    def apply_filter(self, filter_type):
+        if self.image:
+            self.image = self.image.filter(filter_type)
+            self.display_image()
+
+    def reset_image(self):
+        if self.original_image:
+            self.image = self.original_image.copy()
+            self.display_image()
+
+    def save_image(self):
+        if self.image:
+            file_path = filedialog.asksaveasfilename(
+                defaultextension=".png",
+                filetypes=[
+                    ("PNG Files", "*.png"),
+                    ("JPG Files", "*.jpg"),
+                    ("JPEG Files", "*.jpeg"),
+                    ("BMP Files", "*.bmp"),
+                    ("GIF Files", "*.gif"),
+                    ("All Files", "*.*"),
+                ],
+            )
+
+            if file_path:
+                self.image.save(file_path)
+                messagebox.showinfo("Operação Concluída", "Arquivo salvo com sucesso")
+
+    def create_widgets(self):
+        self.load_button = tk.Button(
+            self.root,
+            text="Carregar Imagem",
+            command=self.load_image,
+            bg="#007bff",
+            fg="#ffffff",
+            font=("Arial", 12),
+            padx=10,
+            pady=5,
+        )
+        self.load_button.pack(pady=10)
+
+        self.image_label = tk.Label(self.root, bg="#e6f7ff")
+        self.image_label.pack(pady=10)
+
+        self.filters_frame = tk.Frame(self.root, bg="#e6f7ff")
+        self.filters_frame.pack(pady=20)
+
+        filters = [
+            ("Blur", ImageFilter.BLUR),
+            ("Contour", ImageFilter.CONTOUR),
+            ("Edge Enhance", ImageFilter.EDGE_ENHANCE),
+            ("Emboss", ImageFilter.EMBOSS),
+            ("Sharpen", ImageFilter.SHARPEN),
+            ("Smooth", ImageFilter.SMOOTH),
+        ]
