@@ -70,8 +70,11 @@ def create_widgets(self, load_image, apply_filter, reset_image, save_image):
 
     ##########################################
 
+    self.left_frame = tk.Frame(self.root, bg="red", width=200, height=1000)
+    self.left_frame.pack(side="left", fill="y")
+
     self.load_button = tk.Button(
-        self.root,
+        self.left_frame,
         text="Carregar Imagem",
         command=self.load_image,
         bg="#007bff",
@@ -85,7 +88,7 @@ def create_widgets(self, load_image, apply_filter, reset_image, save_image):
     self.image_label = tk.Label(self.root, bg="#e6f7ff")
     self.image_label.pack(pady=10)
 
-    self.filters_frame = tk.Frame(self.root, bg="#e6f7ff")
+    self.filters_frame = tk.Frame(self.left_frame, bg="#e6f7ff")
     self.filters_frame.pack(pady=20)
 
     filters = [
@@ -107,9 +110,9 @@ def create_widgets(self, load_image, apply_filter, reset_image, save_image):
             font=("Arial", 12),
             padx=10,
             pady=5,
-        ).pack(side="left", padx=10, pady=5)
+        ).pack(side="top", padx=10, pady=5)
 
-    self.buttons_frame = tk.Frame(self.root, bg="#e6f7ff")
+    self.buttons_frame = tk.Frame(self.left_frame, bg="#e6f7ff")
     self.buttons_frame.pack(pady=10)
 
     self.reset_button = tk.Button(
@@ -135,6 +138,3 @@ def create_widgets(self, load_image, apply_filter, reset_image, save_image):
         pady=5,
     )
     self.save_button.pack(side="left", pady=10)
-
-    self.left_frame = tk.Frame(self.root, bg="red")
-    self.left_frame.pack(side="left", fill="y")
