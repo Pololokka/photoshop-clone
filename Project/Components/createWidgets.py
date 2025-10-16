@@ -135,3 +135,6 @@ def create_widgets(self, load_image, apply_filter, reset_image, save_image):
         pady=5,
     )
     self.save_button.pack(side="left", pady=10)
+
+    self.left_frame = tk.Frame(self.root, bg="red")
+    self.left_frame.pack(side="left", fill="y")

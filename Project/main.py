@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, colorchooser
 from PIL import Image, ImageTk, ImageFilter, ImageOps
-from createWidgets import create_widgets
+from Components.createWidgets import create_widgets
 
 
 class ImageEditorApp:
